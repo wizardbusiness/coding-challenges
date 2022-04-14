@@ -18,10 +18,19 @@ Explanation: [4,-1,2,1] has the largest sum = 6.
 // problems: didn't work for sets of purely negative numbers. fixed by setting
 // lgstSum to negative infinity.
 
-// ran out of memory on leetcode test.
+// ran out of memory on leetcode test on 1000 digits array.
 // tried to fix by switching subarray creation from recursive to iterative.
+// didn't speed up algorithm solve time.
 // next step: integrate subarray creation and sum test so that subarrays are
-// discarded if their sum is smaller than the current value of lgstSum.
+// not stored before testing.
+// optimized runtime for 1000 digit array from 3.3 minutes to .572 seconds.
+
+// ran out of time on leetcode tst on 10000 digit array. took 3 mins 35 secs
+// next step: optimize so that subarrays beginning and ending with a negative number
+// aren't reduced.
+// took 2 mins 54 secs.
+// next step: otpimize so that only
+
 
 // const makeSubarrays = (nums, index = 0, arrOfArrs = []) => {
 //   while (nums.length > 0) {
@@ -70,12 +79,14 @@ const maxSubArrays = (nums, index = 0, arrOfArrs = []) => {
     nums.forEach((num) => {
       const subarray = nums.slice(0, index + 1)
         if (subarray.length === 1 && subarray[0] > lgstSum) lgstSum = subarray[0];
-        else if (subarray.length > 1) {
-          const subsum = subarray.reduce((sum, num) => {
+        else if (subarray.length > 1 &&
+        subarray[subarray.length - 1] > 0 &&
+        subarray[0] > 0) {
+          const subSum = subarray.reduce((sum, num) => {
             sum += num;
             return sum;
-          })
-          if (subsum > lgstSum) lgstSum = subsum;
+          });
+          if (subSum > lgstSum) lgstSum = subSum;
         }
       index++;
     });
@@ -86,4 +97,4 @@ const maxSubArrays = (nums, index = 0, arrOfArrs = []) => {
   return lgstSum
 }
 
-console.log(maxSubArrays([1,2, 3]))
+console.log(maxSubArrays([1, 2, 3]))
