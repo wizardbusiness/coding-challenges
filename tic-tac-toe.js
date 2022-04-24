@@ -15,6 +15,7 @@ there are still movements to play return "Pending". */
 // board:
 // create a 2d grid using an array of arrays. Each subarray represents a box
 // in the array.
+// map positions of boxes relative to each other. 
 
 
 // gameplay:
