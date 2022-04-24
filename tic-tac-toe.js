@@ -14,14 +14,13 @@ there are still movements to play return "Pending". */
 
 // board:
 // create a 2d grid using an array of arrays. Each subarray represents a box
-// in the array.
-// map positions of boxes relative to each other.
+// in the array. done.
 
 
 // gameplay:
-// save coordinates of moves for player x and player o.
-// track all winning move-sets.
-
+// save coordinates of moves for player x and player o. done.
+// track all winning move-sets. done.
+// sort moves for player x and o to compare to winning moveset.
 
 
 const board = [
@@ -55,7 +54,7 @@ const tictactoe = (moves) => {
     [[0, 1], [1, 1], [2, 1]],
     [[0, 2], [1, 2], [2, 2]],
     [[0, 0], [1, 1], [2, 2]],
-    [[2, 0], [1, 1], [0, 2]]
+    [[0, 2], [1, 1], [2, 0]]
   ];
   // init cache to store moves by x.
   let cacheX = [];
