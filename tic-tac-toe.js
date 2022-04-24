@@ -20,8 +20,7 @@ there are still movements to play return "Pending". */
 // gameplay:
 // save coordinates of moves for player x and player o. done.
 // track all winning move-sets. done.
-// sort moves for player x and o to compare to winning moveset.
-
+// sort moves for player x and o.
 
 const board = [
   [0, 0], [0, 1], [0, 2],
@@ -69,6 +68,9 @@ const tictactoe = (moves) => {
     if (i % 2 !== 0) cacheX.push(moves[i]);
     else if (i % 2 === 0) cacheO.push(moves[i]);
   }
+  // sort cacheX.
+
+
   // convert caches and winning moves to string so that the includes method
   // can be used.
   cacheX = cacheX.toString();
