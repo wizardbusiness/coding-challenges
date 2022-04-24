@@ -21,8 +21,11 @@ there are still movements to play return "Pending". */
 // save coordinates of moves for player x and player o.
 // track whether a player has 3 in a row, horizontally, vertically, or diagonally.
 
-
-
+const board = [
+  [0, 0], [0, 1], [0, 2],
+  [1, 0], [1, 1], [1, 2],
+  [2, 0], [2, 1], [2, 2]
+];
 
 const tictactoe = (moves) => {
 
