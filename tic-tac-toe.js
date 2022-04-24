@@ -46,5 +46,16 @@ const board = [
 */
 
 const tictactoe = (moves) => {
+  // store winning move-sets in array.
+  // init cache to store moves by x.
+  // init cache to store moves by o.
+  // iterate through moves.
+    // x moves first, so if move is on an even index ( since index starts at 0),
+    // that is a move by 'x'.
+    // if its on an odd index, that is a move by 'o'.
+    // push any moves by 'x' to cache x. push any moves by 'o' to cache o.
+    // check if x or o caches are equivalent to any winning move sets.
+    // if they are, return ' ' wins message.
 
+  // if no winning movesets are discovered, return its a draw message.
 };
