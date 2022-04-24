@@ -47,15 +47,40 @@ const board = [
 
 const tictactoe = (moves) => {
   // store winning move-sets in array.
+  let winningMoves = [
+    [[0, 0], [0, 1], [0, 2]],
+    [[1, 0], [1, 1], [1, 2]],
+    [[2, 0], [2, 1], [2, 2]],
+    [[0, 0], [1, 0], [2, 0]],
+    [[0, 1], [1, 1], [2, 1]],
+    [[0, 2], [1, 2], [2, 2]],
+    [[0, 0], [1, 1], [2, 2]],
+    [[2, 0], [1, 1], [0, 2]]
+  ];
   // init cache to store moves by x.
+  let cacheX = [];
   // init cache to store moves by o.
+  let cacheO = [];
   // iterate through moves.
+  for (let i = 0; i < moves.length; i++) {
     // x moves first, so if move is on an even index ( since index starts at 0),
     // that is a move by 'x'.
     // if its on an odd index, that is a move by 'o'.
     // push any moves by 'x' to cache x. push any moves by 'o' to cache o.
-    // check if x or o caches are equivalent to any winning move sets.
-    // if they are, return ' ' wins message.
-
+    if (i % 2 !== 0) cacheX.push(moves[i]);
+    else if (i % 2 === 0) cacheO.push(moves[i]);
+  }
+  // convert caches and winning moves to string so that the includes method
+  // can be used.
+  cacheX = cacheX.toString();
+  cacheO = cacheO.toString();
+  winningMoves = winningMoves.toString();
+  // check if x or o caches are equivalent to any winning move sets.
+  if (winningMoves.includes(cacheX)) return 'A';
+  // if they are, return ' ' wins message.
+  else if (winningMoves.includes(cacheO)) return 'B';
   // if no winning movesets are discovered, return its a draw message.
+  else return 'Draw';
 };
+
+console.log(tictactoe([[0,0],[2,0],[1,1],[2,1],[2,2]])) // 'A'
