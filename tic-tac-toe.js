@@ -22,11 +22,28 @@ there are still movements to play return "Pending". */
 // save coordinates of moves for player x and player o.
 // track all winning move-sets.
 
+
+
 const board = [
   [0, 0], [0, 1], [0, 2],
   [1, 0], [1, 1], [1, 2],
   [2, 0], [2, 1], [2, 2]
 ];
+
+// winning move-sets.
+/*
+// horizontal
+[0, 0], [0, 1], [0, 2]
+[1, 0], [1, 1], [1, 2]
+[2, 0], [2, 1], [2, 2]
+// vertical
+[0, 0], [1, 0], [2, 0]
+[0, 1], [1, 1], [2, 1]
+[0, 2], [1, 2], [2, 2]
+// diagonal
+[0, 0], [1, 1], [2, 2]
+[2, 0], [1, 1], [0, 2]
+*/
 
 const tictactoe = (moves) => {
 
