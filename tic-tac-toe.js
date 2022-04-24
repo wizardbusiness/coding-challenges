@@ -15,12 +15,12 @@ there are still movements to play return "Pending". */
 // board:
 // create a 2d grid using an array of arrays. Each subarray represents a box
 // in the array.
-// map positions of boxes relative to each other. 
+// map positions of boxes relative to each other.
 
 
 // gameplay:
 // save coordinates of moves for player x and player o.
-// track whether a player has 3 in a row, horizontally, vertically, or diagonally.
+// track all winning move-sets.
 
 const board = [
   [0, 0], [0, 1], [0, 2],
