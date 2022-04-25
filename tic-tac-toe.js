@@ -43,6 +43,93 @@ const board = [
 [2, 0], [1, 1], [0, 2]
 */
 
+// sort subarrays challenge.
+function sortSubArr(arr) {
+  // sorted
+  let sorted1 = [];
+  let sorted2 = [];
+  // iterate through array of arrays.
+  while (arr.length > 0) {
+    // console.log(arr)
+    // set min to first element of first subarray, (in a sec we will compare the
+    // first element in the other subarrays to see which is actually lowest.
+    let min = arr[0];
+    // compare:
+    // pause on the current sub array, iterate through and compare its first element
+    // to each other subarray's first element..
+    for (let subArr of arr) {
+      // console.log(subArr)
+      // if a subArrays elements are both less than the current mins elements.
+      // reassign min to this subArray.
+      if (subArr[0] <= min[0]) {
+      min = subArr;
+      }
+    }
+    console.log(min)
+    // find and then remove the min sub array from array. This is so that value
+    // will not be evaluated as the local min again. This also shortens the unsorted
+    // input array, fulfilling our while loop break condition.)
+    let minSubIndex;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i][0] === min[0] && arr[i][1] === min[1]) minSubIndex = i;
+    }
+    // console.log(minSubIndex)
+    arr.splice(minSubIndex, 1);
+
+    // push the local min value to sorted.
+    sorted1.push(min);
+    // iterate through the shortened unsorted array again until it is empty.
+  }
+
+  while (sorted1.length > 0) {
+    // console.log(arr)
+    // set min to first element of first subarray, (in a sec we will compare the
+    // first element in the other subarrays to see which is actually lowest.
+    let min = sorted1[0];
+    // compare:
+    // pause on the current sub array, iterate through and compare its first element
+    // to each other subarray's first element..
+    for (let subArr of sorted1) {
+      // console.log(subArr)
+      // if a subArrays elements are both less than the current mins elements.
+      // reassign min to this subArray.
+      if (subArr[0] <= min[0]) {
+      min = subArr;
+      }
+    }
+    // console.log(min)
+    // find and then remove the min sub array from array. This is so that value
+    // will not be evaluated as the local min again. This also shortens the unsorted
+    // input array, fulfilling our while loop break condition.)
+    let minSubIndex;
+    for (let i = 0; i < sorted1.length; i++) {
+      if (sorted1[i][0] === min[0] && sorted1[i][1] === min[1]) minSubIndex = i;
+    }
+    // console.log(minSubIndex)
+    sorted1.splice(minSubIndex, 1);
+
+    // push the local min value to sorted.
+    sorted2.push(min);
+    // iterate through the shortened unsorted array again until it is empty.
+  }
+
+
+  // return the sorted array.
+  return sorted2;
+}
+
+console.log(sortSubArr([[2, 0], [1, 1], [1, 2], [0, 0]])); // [[0, 2], [1, 1], [2, 0]]
+
+const test = [[2, 0], [1, 1], [1, 2]];
+
+// test indexing of subarrays.
+// for (let i = 0; i < test.length; i++) {
+//   if (test[i][0] === 1 && test[i][1] === 1) console.log(i);
+// }
+const test2 = [1, 2, 3, 4]
+
+// console.log(test2.indexOf(4))
+
 const tictactoe = (moves) => {
   // store winning move-sets in array.
   let winningMoves = [
@@ -70,7 +157,6 @@ const tictactoe = (moves) => {
   }
   // sort cacheX.
 
-
   // convert caches and winning moves to string so that the includes method
   // can be used.
   cacheX = cacheX.toString();
@@ -84,39 +170,4 @@ const tictactoe = (moves) => {
   else return 'Draw';
 };
 
-console.log(tictactoe([[0,0],[2,0],[1,1],[2,1],[2,2]])) // 'A'
-
-// sort subarrays challenge.
-
-function sort(arr) {
-  // sorted
-  let sorted = [];
-  let i = 0;
-  // iterate through array.
-  while (arr.length > 0) {
-    // set min to first value of array,. we will compare all other elements
-    // to see if it is actually the lowest.
-    let min = arr[0];
-    // compare:
-    // pause on the current element, iterate through the whole array for it.
-    for (let element of arr) {
-      // if an element is less than the current min
-      // reassign min to it.
-      if (element < min) min = element;
-    }
-    // find and then remove the value of min from array. This is so that value
-    // will not be evaluated as the local min again. This also shortens the unsorted
-    // input array, fulfilling our while loop break condition.)
-    const minI = arr.indexOf(min);
-    if (minI > -1) arr.splice(minI, 1);
-    // push the local min value to sorted.
-    sorted.push(min);
-    // iterate through the shortened unsorted array again until it is empty.
-  }
-  // return the sorted array.
-  return sorted;
-}
-
-// console.log(sort([[2, 0], [1, 1], [0, 2]])); // [[0, 2], [1, 1], [2, 0]]
-
-console.log(sort([2, 3, 1, 5])) // 1, 2, 3, 5
+// console.log(tictactoe([[0,0],[2,0],[1,1],[2,1],[2,2]])) // 'A'
