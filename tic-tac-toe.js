@@ -85,3 +85,38 @@ const tictactoe = (moves) => {
 };
 
 console.log(tictactoe([[0,0],[2,0],[1,1],[2,1],[2,2]])) // 'A'
+
+// sort subarrays challenge.
+
+function sort(arr) {
+  // sorted
+  let sorted = [];
+  let i = 0;
+  // iterate through array.
+  while (arr.length > 0) {
+    // set min to first value of array,. we will compare all other elements
+    // to see if it is actually the lowest.
+    let min = arr[0];
+    // compare:
+    // pause on the current element, iterate through the whole array for it.
+    for (let element of arr) {
+      // if an element is less than the current min
+      // reassign min to it.
+      if (element < min) min = element;
+    }
+    // find and then remove the value of min from array. This is so that value
+    // will not be evaluated as the local min again. This also shortens the unsorted
+    // input array, fulfilling our while loop break condition.)
+    const minI = arr.indexOf(min);
+    if (minI > -1) arr.splice(minI, 1);
+    // push the local min value to sorted.
+    sorted.push(min);
+    // iterate through the shortened unsorted array again until it is empty.
+  }
+  // return the sorted array.
+  return sorted;
+}
+
+// console.log(sort([[2, 0], [1, 1], [0, 2]])); // [[0, 2], [1, 1], [2, 0]]
+
+console.log(sort([2, 3, 1, 5])) // 1, 2, 3, 5
