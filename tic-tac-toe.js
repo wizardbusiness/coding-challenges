@@ -122,7 +122,7 @@ function sortSubArr(arr) {
       // console.log(subArr)
       // if a subArrays elements are both less than the current mins elements.
       // reassign min to this subArray.
-      if (subArr[0] <= min[0]) {
+      if (subArr[0] <= min[0] && subArr[1] <= min[1]) {
       min = subArr;
       }
     }
@@ -147,6 +147,9 @@ function sortSubArr(arr) {
   return sorted2;
 }
 
+// console.log(sortSubArr([[1,2],[2,1],[1,0],[0,0],[0,1],[2,0],[1,1]])); // [[0, 2], [1, 1], [2, 0]]
+
+
 const tictactoe = (moves) => {
   // store winning move-sets in array.
   let winningMoves = [
@@ -159,9 +162,6 @@ const tictactoe = (moves) => {
     [[0, 0], [1, 1], [2, 2]],
     [[0, 2], [1, 1], [2, 0]]
   ];
-  let draws = [
-
-  ]
   // init cache to store moves by x.
   let cacheX = [];
   // init cache to store moves by o.
@@ -178,20 +178,21 @@ const tictactoe = (moves) => {
   // sort cacheX.
   cacheX = sortSubArr(cacheX);
   console.log(cacheX)
+  cacheX = cacheX.flat(1);
   // sort cacheO.
   cacheO = sortSubArr(cacheO);
   console.log(cacheO)
-  // convert caches and winning moves to string so that the includes method
-  // can be used.
-  cacheX = cacheX.toString();
-  cacheO = cacheO.toString();
-  winningMoves = winningMoves.toString();
-  // check if x or o caches are equivalent to any winning move sets.
-  if (winningMoves.includes(cacheX)) return 'A';
-  // if they are, return ' ' wins message.
-  else if (winningMoves.includes(cacheO)) return 'B';
+  cacheO = cacheO.flat(1);
+  // check each moveset in caches against winning moveset.
+  for (let winSet of winningMoves) {
+    winSet = winSet.flat(1)
+      if (cacheX.toString() === winSet.toString()) return 'A'
+      if (cacheO.toString() === winSet.toString()) return 'B'
+  }
+  if (moves.length < 9) return 'Pending';
   // if no winning movesets are discovered, return its a draw message.
   else return 'Draw';
 };
 
-console.log(tictactoe([[1,0],[2,2],[2,0],[0,1],[1,1]])) // 'Pending'
+console.log(tictactoe([[1,2],[2,1],[1,0],[0,0],[0,1],[2,0],[1,1]])) //
+let test = [[1, 0], [2, 1], [2, 2]];
