@@ -20,7 +20,7 @@ there are still movements to play return "Pending". */
 // gameplay:
 // save coordinates of moves for player x and player o. done.
 // track all winning move-sets. done.
-// sort moves for player x and o.
+// sort moves for player x and o. done
 
 const board = [
   [0, 0], [0, 1], [0, 2],
