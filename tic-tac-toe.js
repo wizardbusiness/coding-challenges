@@ -20,7 +20,7 @@ there are still movements to play return "Pending". */
 // gameplay:
 // save coordinates of moves for player x and player o. done.
 // track all winning move-sets. done.
-// track all movesets that could become winning movesets(pending state). 
+// track all movesets that could become winning movesets(pending state).
 // sort moves for player x and o. done
 
 const board = [
@@ -146,18 +146,6 @@ function sortSubArr(arr) {
   // return the sorted array.
   return sorted2;
 }
-
-// console.log(sortSubArr([[2, 0], [1, 1], [1, 2], [0, 0]])); // [[0, 2], [1, 1], [2, 0]]
-
-const test = [[2, 0], [1, 1], [1, 2]];
-
-// test indexing of subarrays.
-// for (let i = 0; i < test.length; i++) {
-//   if (test[i][0] === 1 && test[i][1] === 1) console.log(i);
-// }
-const test2 = [1, 2, 3, 4]
-
-// console.log(test2.indexOf(4))
 
 const tictactoe = (moves) => {
   // store winning move-sets in array.
