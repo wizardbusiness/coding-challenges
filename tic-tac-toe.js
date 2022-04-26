@@ -170,6 +170,9 @@ const tictactoe = (moves) => {
     [[0, 0], [1, 1], [2, 2]],
     [[0, 2], [1, 1], [2, 0]]
   ];
+  let draws = [
+
+  ]
   // init cache to store moves by x.
   let cacheX = [];
   // init cache to store moves by o.
@@ -180,13 +183,15 @@ const tictactoe = (moves) => {
     // that is a move by 'x'.
     // if its on an odd index, that is a move by 'o'.
     // push any moves by 'x' to cache x. push any moves by 'o' to cache o.
-    if (i % 2 !== 0) cacheX.push(moves[i]);
-    else if (i % 2 === 0) cacheO.push(moves[i]);
+    if (i % 2 === 0) cacheX.push(moves[i]);
+    else if (i % 2 !== 0) cacheO.push(moves[i]);
   }
   // sort cacheX.
   cacheX = sortSubArr(cacheX);
+  console.log(cacheX)
   // sort cacheO.
   cacheO = sortSubArr(cacheO);
+  console.log(cacheO)
   // convert caches and winning moves to string so that the includes method
   // can be used.
   cacheX = cacheX.toString();
@@ -200,4 +205,4 @@ const tictactoe = (moves) => {
   else return 'Draw';
 };
 
-console.log(tictactoe([[0,0],[2,0],[1,1],[2,1],[2,2]])) // 'A'
+console.log(tictactoe([[1,0],[2,2],[2,0],[0,1],[1,1]])) // 'Pending'
