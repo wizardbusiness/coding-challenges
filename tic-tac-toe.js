@@ -20,8 +20,11 @@ there are still movements to play return "Pending". */
 // gameplay:
 // save coordinates of moves for player x and player o. done.
 // track all winning move-sets. done.
-// track all movesets that could become winning movesets(pending state).
-// sort moves for player x and o. done
+// track all movesets that could become winning movesets(pending state). Not done,
+// just ended up saying if moves are less than 9 and no one has won, the game is
+// pending.
+// sort moves for player x and o. done but dead end.
+// check player moves against winning moves on a per-move basis. 
 
 const board = [
   [0, 0], [0, 1], [0, 2],
@@ -149,6 +152,9 @@ function sortSubArr(arr) {
 
 // console.log(sortSubArr([[1,2],[2,1],[1,0],[0,0],[0,1],[2,0],[1,1]])); // [[0, 2], [1, 1], [2, 0]]
 
+const compareArrs = (array1, array2) => {
+    return array1.every((item) => array1.indexOf(item) === array2.indexOf(item)) && Boolean(array1.length === array2.length)
+  }
 
 const tictactoe = (moves) => {
   // store winning move-sets in array.
@@ -175,24 +181,49 @@ const tictactoe = (moves) => {
     if (i % 2 === 0) cacheX.push(moves[i]);
     else if (i % 2 !== 0) cacheO.push(moves[i]);
   }
-  // sort cacheX.
-  cacheX = sortSubArr(cacheX);
-  console.log(cacheX)
-  cacheX = cacheX.flat(1);
-  // sort cacheO.
-  cacheO = sortSubArr(cacheO);
+  // check each moveset in caches against winning moveset. // try match counter.
+  // if theres a move match for a player, tick the counter. if there are 3 matches,
+  // that player wins.
+  // i want to compare every move in cache to every move in winning moves, and I
+  // want to track when we switch movesets.
+  // console.log(cacheX)
   console.log(cacheO)
-  cacheO = cacheO.flat(1);
-  // check each moveset in caches against winning moveset.
-  for (let winSet of winningMoves) {
-    winSet = winSet.flat(1)
-      if (cacheX.toString() === winSet.toString()) return 'A'
-      if (cacheO.toString() === winSet.toString()) return 'B'
+  while (cacheX.length > 0) {
+
+    let switchSet = 0;
+    for (let i = 0; i < winningMoves.length; i++) {
+      let matchCount = 0;
+      for (let j = 0; j < winningMoves[i].length; j++) {
+        let wMove = winningMoves[i][j];
+        // console.log(wMove)
+        let xMove = cacheX[0];
+        // console.log(xMove)
+        // every 3 winning moves, reset set counter.
+        if (compareArrs(wMove, xMove) === true) matchCount ++;
+        // console.log(matchCount)
+        if (matchCount === 3) return 'A';
+      }
+    }
+    cacheX.shift()
+  }
+  while (cacheO.length > 0) {
+    for (let i = 0; i < winningMoves.length; i++) {
+      let matchCount = 0;
+      for (let j = 0; j < winningMoves[i].length; j++) {
+        let wMove = winningMoves[i][j];
+        console.log(wMove)
+        let oMove = cacheO[0];
+        console.log(oMove)
+        if (compareArrs(wMove, oMove) === true) matchCount ++;
+        console.log(matchCount)
+        if (matchCount === 3) return 'B';
+      }
+    }
+    cacheO.shift()
   }
   if (moves.length < 9) return 'Pending';
   // if no winning movesets are discovered, return its a draw message.
   else return 'Draw';
 };
 
-console.log(tictactoe([[1,2],[2,1],[1,0],[0,0],[0,1],[2,0],[1,1]])) //
-let test = [[1, 0], [2, 1], [2, 2]];
+console.log(tictactoe([[0,0],[1,1],[0,1],[0,2],[1,0],[2,0]])) //
